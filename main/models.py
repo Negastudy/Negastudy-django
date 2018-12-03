@@ -27,7 +27,7 @@ class Assignment(models.Model):
 class Board(models.Model):
 	study = models.ForeignKey(Study, on_delete=models.CASCADE)
 	auth = models.CharField(max_length=200)  # 수정필요 (https://tutorial.djangogirls.org/ko/django_models/ 예시 모델 참고)
-	title = models.CharField(max_length=200) 
+	title = models.CharField(max_length=200)
 	date = models.DateTimeField(blank=True, null=True)
 	content = models.TextField()
 
