@@ -13,9 +13,9 @@ class User(models.Model):
 
 
 class Study(models.Model):
-	category = models.IntegerField()
+	category = models.IntegerField(null=True)
 	name = models.CharField(max_length=200)
-	company = models.IntegerField()
+	company = models.IntegerField(null=True)
 	id = models.AutoField(primary_key=True)
 
 
@@ -25,7 +25,7 @@ class Assignment(models.Model):
 
 
 class Board(models.Model):
-	study = models.ForeignKey(Study, on_delete=models.CASCADE)
+	# study = models.ForeignKey(Study, on_delete=models.CASCADE)
 	auth = models.CharField(max_length=200)  # 수정필요 (https://tutorial.djangogirls.org/ko/django_models/ 예시 모델 참고)
 	title = models.CharField(max_length=200)
 	date = models.DateTimeField(blank=True, null=True)
