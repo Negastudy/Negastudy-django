@@ -1,13 +1,15 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # CharField는 임시적으로 모두 200글자 제한으로 둠
-
+'''
 class User(models.Model):
 	sex = models.IntegerField()
 	name = models.CharField(max_length=200)
 	password = models.TextField()
 	email = models.TextField()
+'''
 
 
 class Study(models.Model):
@@ -23,7 +25,7 @@ class Assignment(models.Model):
 
 
 class Board(models.Model):
-	# ForeignKey (Study) 추가필요
+	study = models.ForeignKey(Study, on_delete=models.CASCADE)
 	auth = models.CharField(max_length=200)  # 수정필요 (https://tutorial.djangogirls.org/ko/django_models/ 예시 모델 참고)
 	title = models.CharField(max_length=200)
 	date = models.DateTimeField(blank=True, null=True)
