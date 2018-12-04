@@ -14,12 +14,12 @@ class Study(models.Model):
 
 class Assignment(models.Model):
 	deadline = models.DateTimeField(blank=True, null=True)
-	study = models.ForeignKey(Study, on_delete=models.CASCADE)
+	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
 
 
 class Board(models.Model):
-	study = models.ForeignKey(Study, on_delete=models.CASCADE)
-	author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
+	author = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
 	title = models.CharField(max_length=200)
 	date = models.DateTimeField(blank=True, null=True)
 	content = models.TextField()
@@ -34,8 +34,8 @@ class Board(models.Model):
 
 
 class User_Study(models.Model):
-	uid = models.ForeignKey(User, on_delete=models.CASCADE)
-	study = models.ForeignKey(Study, on_delete=models.CASCADE)
+	uid = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
 
 
 class Meeting(models.Model):
@@ -45,11 +45,11 @@ class Meeting(models.Model):
 
 
 class Attendance(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE, null=True)
 
 
 class User_Study_Assignment(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	study = models.ForeignKey(Study, on_delete=models.CASCADE)
-	assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
+	assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, null=True)
