@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'Category_Manager',
+    'Studycafe_Manager',
 ]
 
 MIDDLEWARE = [
