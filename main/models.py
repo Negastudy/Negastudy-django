@@ -9,12 +9,11 @@ class Study(models.Model):
 	category = models.IntegerField(null=True)
 	name = models.CharField(max_length=200)
 	company = models.IntegerField(null=True)
-	id = models.AutoField(primary_key=True)
 	limit = models.IntegerField(null=True)
 	complete = models.IntegerField(null=True)
 
-	def __str__(self):
-		return self.name
+	'''def __str__(self):
+		return self.name'''
 
 
 class Assignment(models.Model):
@@ -45,7 +44,10 @@ class User_Study(models.Model):
 
 class Meeting(models.Model):
 	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
-	date = models.DateTimeField(blank=True, null=True)
+	date = models.DateField(blank=True, null=True)
+	time = models.TimeField(blank=True, null=True)
+	location = models.CharField(max_length=200, null=True)
+	content = models.TextField(null=True)
 
 
 class Attendance(models.Model):
