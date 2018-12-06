@@ -10,6 +10,11 @@ class Study(models.Model):
 	name = models.CharField(max_length=200)
 	company = models.IntegerField(null=True)
 	id = models.AutoField(primary_key=True)
+	limit = models.IntegerField(null=True)
+	complete = models.IntegerField(null=True)
+
+	def __str__(self):
+		return self.name
 
 
 class Assignment(models.Model):
@@ -34,22 +39,22 @@ class Board(models.Model):
 
 
 class User_Study(models.Model):
-	uid = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
 	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
 
 
 class Meeting(models.Model):
-	# ForeignKey (User_Study) 추가필요
+	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
 	date = models.DateTimeField(blank=True, null=True)
-	location = models.TextField()
 
 
 class Attendance(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
 	meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE, null=True)
+	location = models.TextField()
 
 
 class User_Study_Assignment(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
 	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
 	assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, null=True)
