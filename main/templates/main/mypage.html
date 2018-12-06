@@ -6,9 +6,8 @@
 -->
 
 <!--css-->
-{%  load staticfiles %}
-<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-<link rel="stylesheet" href="{% static 'mypage.css' %}">
+<link rel="stylesheet" href="../assets/css/main.css" />
+<link rel="stylesheet" href="mypage.css">
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css-411">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -41,9 +40,9 @@
 		<div class="inner">
 
 			<!-- Logo -->
-			<a href="../home/home.html" class="logo">
+			<a href="../../static/home/home.html" class="logo">
 				<span class="symbol" >
-					<img src="../images/로고_전구.png" alt="" />
+					<img src="../../static/images/로고_전구.png" alt="" />
 				</span>
 				<span class="title" style="font-size: 1.3em; color: #585858;">NEGASTUDY</span>
 			</a>
@@ -62,11 +61,11 @@
 	<nav id="menu">
 		<h2>Menu</h2>
 		<ul>
-			<li><a href="../home/home.html">홈 화면</a></li>
+			<li><a href="home.html">홈 화면</a></li>
 			<!--<li><a href="../generic.html">즐겨찾기</a></li>-->
 			<!--<li><a href="../generic.html">나의 일정관리</a></li>-->
-			<li><a href="../generic.html">스터디 카페</a></li>
-			<li><a href="../My_Page/mypage.html">마이 페이지</a></li>
+			<li><a href="generic.html">스터디 카페</a></li>
+			<li><a href="mypage.html">마이 페이지</a></li>
 		</ul>
 	</nav>
 </div>
@@ -90,8 +89,9 @@
 			<!--사용자 프로필-->
 			<div class="panel panel-default">
 				<div class="panel-heading" style="background-color : #9DD044">개인정보<i class="fa fa-link fa-1x"></i></div>
-				<div class="panel-body"><a > {{  data.username }} </a></div>
-				<div class="panel-body"><a > {{ data.email }} </a></div>
+				<div class="panel-body"><a > {{ username }} </a></div>
+				<div class="panel-body"><a > {% userschool %} </a></div>
+				<div class="panel-body"><a > {%useremail%} </a></div>
 			</div>
 
 			<!--사용자 스터디 목록 - 반복으로 출력 -->
@@ -108,11 +108,11 @@
 </div>
 
 <!-- Scripts -->
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/browser.min.js"></script>
-<script src="../assets/js/breakpoints.min.js"></script>
-<script src="../assets/js/util.js"></script>
-<script src="../assets/js/main.js"></script>
+<script src="../../static/assets/js/jquery.min.js"></script>
+<script src="../../static/assets/js/browser.min.js"></script>
+<script src="../../static/assets/js/breakpoints.min.js"></script>
+<script src="../../static/assets/js/util.js"></script>
+<script src="../../static/assets/js/main.js"></script>
 
 </body>
 </html>

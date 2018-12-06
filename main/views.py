@@ -44,3 +44,4 @@ def send_email(request):
     verifynum = random.randint(1, 10000) + 10000;
     send_mail('Negastudy Email Verification Code', 'The verification code is '+str(verifynum), 'negastudyverify@gmail.com', ['starlight3714@gmail.com'], fail_silently=False)
     return HttpResponse('Mail Success')
+
