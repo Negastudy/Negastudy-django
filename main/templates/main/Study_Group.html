@@ -16,7 +16,7 @@
 
     <!--스터디 이름-->
     <div class="st-name">
-        <H1>삼성전자 GSAT 스터디 </H1>
+        <H1>{{ study.name }} </H1>
     </div>
     <!--hr은 빼도됨 // 디자인상 넣는게 좋은가 안좋은가-->
     <hr>
@@ -44,30 +44,14 @@
         </tr>
         </thead>
         <tbody>
+        {% for meeting in meeting_list %}
         <tr>
-            <td>내용</td>
-            <td>내용</td>
-            <td>내용</td>
-            <td>내용</td>
+            <td>{{ meeting.date }}</td>
+            <td>{{ meeting.time }}</td>
+            <td>{{ meeting.location }}</td>
+            <td>{{ meeting.content }}</td>
         </tr>
-        <tr>
-            <td>내용</td>
-            <td>내용</td>
-            <td>내용</td>
-            <td>내용</td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td>내용</td>
-            <td>내용</td>
-            <td>내용</td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td>내용</td>
-            <td>내용</td>
-            <td>내용</td>
-        </tr>
+        {% endfor %}
         </tbody>
     </table>
     <!--hr은 빼도됨 // 디자인상 넣는게 좋은가 안좋은가-->

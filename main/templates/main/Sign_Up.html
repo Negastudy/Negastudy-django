@@ -60,7 +60,7 @@
         <h2 class="fs-title">회원가입</h2>
         <h3 class="fs-subtitle">이메일을 인증하세요.</h3>
         <!--일반인 이메일 인증-->
-
+        {% csrf_token %}
         <input type="text" name="signup-email" id="signup-email"  placeholder="이메일" style="float: left ;width :70%;">
         <input type="button" name="email-send" class="email-send" value="발송" style="float : right; width:20%;" />
         <input type="text" name="signup-email-check" id="signup-email-check" placeholder="인증번호" style="float: left ;width :70%;"/>
@@ -95,8 +95,34 @@
 <script src="../../static/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../static/assets/js/jquery.backstretch.min.js"></script>
 <script src="../../static/assets/js/scripts.js"></script>
+<script>
+$(document).ready(function() {
+    $(".email-send").click(function() {
+        var email = document.getElementById('signup-email').value;
+        $.ajax({
+            method: 'POST',
+            url: 'send_email',
+            data: {'email': email, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: "json",
 
+        });
+    })
+})
+</script>
+<script>
+$(document).ready(function() {
+    $(".email-check").click(function() {
+        var code = document.getElementById('signup-email-check').value;
+        $.ajax({
+            method: 'POST',
+            url: 'check_code',
+            data: {'code': code, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            dataType: "json",
 
+        });
+    })
+})
+</script>
 >>>>>>> 652fe0fc78f4a105af5c03d5992563ee198a756c
 
 <!--[if lt IE 10]>-->

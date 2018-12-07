@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import date
 
-
 # CharField는 임시적으로 모두 200글자 제한으로 둠
 
 class Study(models.Model):
@@ -29,14 +28,8 @@ class Study(models.Model):
 			self.complete = True
 		super(Study, self).save()
 
-
-
-	def add_members():
-		''' 스터디 멤버 추가 '''
-		pass
-
-	def __str__(self):
-		return self.name
+	'''def __str__(self):
+		return self.name'''
 
 
 class Assignment(models.Model):
@@ -67,7 +60,10 @@ class User_Study(models.Model):
 
 class Meeting(models.Model):
 	study = models.ForeignKey(Study, on_delete=models.CASCADE, null=True)
-	date = models.DateTimeField(blank=True, null=True)
+	date = models.DateField(blank=True, null=True)
+	time = models.TimeField(blank=True, null=True)
+	location = models.CharField(max_length=200, null=True)
+	content = models.TextField(null=True)
 
 
 class Attendance(models.Model):
