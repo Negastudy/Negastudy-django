@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-# CharField는 임시적으로 모두 200글자 제한으로 둠
+# CharField는 임시적으로 모두 200글자 제한으로 둠r
 
 
 class Study(models.Model):
