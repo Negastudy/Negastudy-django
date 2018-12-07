@@ -45,3 +45,8 @@ def send_email(request):
     send_mail('Negastudy Email Verification Code', 'The verification code is '+str(verifynum), 'negastudyverify@gmail.com', ['starlight3714@gmail.com'], fail_silently=False)
     return HttpResponse('Mail Success')
 
+
+def Study_Group(request):
+
+    return render(request, 'main/Study_Group.html')
+
