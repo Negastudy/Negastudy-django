@@ -1,74 +1,146 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="../../static/assets/css/main.css" />
+<link rel="stylesheet" href="../../static/Study_Group/Study_Group.css">
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css-411">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css-400">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../static/Study_Group/Study_Group.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
+    <title>NEGASTUDY</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<!--스터디 카테고리-->
-<div class="st-category">
-    <h4 >#{{ category }}</h4>
-</div>
+<div id="group-wrapper">
+    <header id="group-header">
+        <div class="inner">
 
-<!--스터디 이름-->
-<div class="st-name">
-    <H1>{{ title }}</H1>
-</div>
-<!--hr은 빼도됨 // 디자인상 넣는게 좋은가 안좋은가-->
-<hr>
+            <!-- Logo -->
+            <a href="../home/home.html" class="logo">
+                    <span class="symbol" >
+                        <img src="../../static/images/로고_전구.png" alt="" />
+                    </span>
+                <span class="title" style="font-size: 1.3em; color: #585858;">NEGASTUDY</span>
+            </a>
 
-<!--스터디 일정-->
-<div class="st-calender">
-    <img style="margin-left:15px; display:inline-block" src="../../static/assets/img/icon/st_day_icon.png" width="10px" height="10px" alt="calender" />
-    <h5 class="st-day" style="display:inline-block">{{ StartTime }} ~ {{ EndTime }}  </h5><br>
-</div>
 
-<!--스터디 공지사항-->
-<div class = "st-speaker">
-    <img style="margin-left:15px; display:inline-block" src="../../static/assets/img/icon/st_speaker.png" class="st_speaker" width="10px" height="10px" alt="speaker" />
-    <h5 class="st-speaker" style="display:inline-block">{{ notice }}  </h5>
-</div>
+            <!-- Nav -->
+            <a href="Edit_Study_Group.html" class="mypage-icon">
+                <!--세팅버튼-->
+                <span class="mypage-icon-but2">
+                        <img src="../../static/images/group-setting.png" style="width:2.5em; height:2em"/>
+                    </span>
+                <!--마이페이지 버튼-->
+                <span class="mypage-icon-but">
+                        <img src="../../static/images/mypage_icon.png" style="width:2.5em; height:2em"/>
 
-<!--일정-->
-<table class="st-table">
-    <thead>
-    <tr>
-        <th scope="cols">날짜</th>
-        <th scope="cols">시간</th>
-        <th scope="cols">장소</th>
-        <th scope="cols">내용</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for meeting in meeting_list %}
-        <tr>
-            <td>{{ meeting.date }}</td>
-            <td>{{ meeting.time }}</td>
-            <td>{{ meeting.location }}</td>
-            <td>{{ meeting.content }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-<!--hr은 빼도됨 // 디자인상 넣는게 좋은가 안좋은가-->
-<hr>
-<!--스터디원 프로필 사진 수평 배치-->
-<div class="st-people">
-    {% for p in people %}
-        <div class="st-profile" style="display:inline-block">
-            <div class="st-profile-img">
-                <img style="margin-left:5px;border: 1px solid darkgrey;border-radius: 15px;-moz-border-radius: 15px;-webkit-border-radius: 100px;"
-                     src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" width="50px" height="50px" alt="avatar"/>
-            </div>
-            <p>
-                {{ p.username }}
+                    </span>
+            </a>
+
         </div>
-    {% endfor %}
+    </header>
+
 </div>
 
+
+<div id="studygroup-main" class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-3" style="margin-top:5em"><!--left col-->
+            <!--스터디 카테고리 & 스터디 이름-->
+            <div class="study-cate">
+                #{{ category }}
+            </div>
+            <div class="study-name">
+                {{title}}
+                {% if complete %}
+                    <span style="background-color: rgb(246, 246, 246); color: rgb(102, 102, 102); border-color: rgb(216, 216, 216); font-weight:700;font-size: 0.7em">종료</span>
+                {% else %}
+                    <span style="color:#9dd044; font-size: 0.7em; font-weight:700;">진행중</span>
+                {% endif %}
+            </div>
+
+            <!--다음 일정 날짜-->
+            <!--<div class="next-meeting-date">-->
+            <!--<img src="../images/group-cal.png"/>-->
+            <!--<P>다음 일정 : 18-12-28 잠원동 토즈</P>-->
+            <!--</div>-->
+            <!--공지사항 -->
+            <div class="study-alarm">
+                <img src="../../static/images/group-announce.png">
+                {% if notice != None %}
+                    <p class="st-speaker" style="display:inline-block">"{{ notice }}"  </p>
+                {% else %}
+                    <p class="st-speaker" style="display:inline-block"><span style="color: gray">공지 없음 </span></p>
+                {% endif %}
+                <!--<p>자소서 필참 질문 10개</p>-->
+                <!--<p>1분 자기소개 2가지 준비</p>-->
+            </div>
+
+            <!--그동안의 일정-->
+            <div class="study-sche">
+                <legend> 일정 관리 </legend>
+                {% if meeting_list == None %}
+                    <table>
+                        <tbody>
+                        <tr><td>
+                            <p style="font-weight: 800; font-size: 20px; text-align: center; color:darkgray">
+                                일정 없음
+                            </p></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+                {% else %}
+                    <table>
+                        <tbody>
+                        {% for meeting in meeting_list %}
+                            <tr>
+                                <td class="tbst-date">{{meeting.date.month}}/{{meeting.date.day}}</td>
+                                <td class="tbst-time">{{ meeting.time}}</td>
+                                <td class="tbst-content">[장소] {{meeting.location}}
+                                    <br>
+                                    [내용] {{meeting.content}}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                {% endif %}
+
+            <!--멤버 관리-->
+            <div class="study-mem">
+                <legend> 회원 관리 </legend>
+                {% for p in people %}
+                    <div class="mem">
+                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="mem-img"/>
+                        <div class="mem-content"> <strong> {{p.username}}</strong> 참여도
+                            <!--<p> 스터디 참여도</p>-->
+                            <DIV class=progress-small>
+                                <DIV role=progressbar aria-valuenow=10 aria-valuemin=0 class="progress-bar-small progress-bar-s-success" style="WIDTH: 80%" aria-valuemax=100>
+                                    <SPAN class=sr-only>60% Complete</SPAN>
+                                </DIV><!-- Complete -->
+                            </DIV>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div><!--/col-9-->
+    </div><!--/row-->
+</div>
 </body>
 </html>

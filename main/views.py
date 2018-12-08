@@ -95,14 +95,21 @@ def Study_detail(request, pk):
 	StartTime = study_group.startTime
 	EndTime = study_group.endTime
 	notice = getNotice(pk)
+	meeting_list = []
+	# Meeting.time.hour
+	# Meeting.time.minute
+	#Meeting.time.fold
 	try:
-		meeting_list = Meeting.objects.filter(study=pk).order_by('date')
+		meeting_list = Meeting.objects.filter(study=pk).order_by('-date')
 		meeting_list = meeting_list[0:4]
+
 	except Meeting.DoesNotExist:
-		meeting_list = None
+		meeting_list = []
+
 	people = getPeoplenames(pk)
 	complete = study_group.complete
-	print(complete)
+	if len(meeting_list) == 0:
+		meeting_list = None
 
 	return render(request, 'main/Study_Group.html', locals())
 
