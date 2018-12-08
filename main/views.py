@@ -101,3 +101,7 @@ def Study_detail(request, pk):
 	print(complete)
 
 	return render(request, 'main/Study_Group.html', locals())
+
+
+def create(request):
+	return render(request, 'main/Study_Create.html', locals())
