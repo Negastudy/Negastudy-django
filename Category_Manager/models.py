@@ -15,3 +15,8 @@ class Company(models.Model):
 
 	def __int__(self):
 		return self._id
+
+
+class School(models.Model):
+	_id = models.IntegerField()
+	name = models.CharField(max_length=200)

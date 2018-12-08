@@ -4,14 +4,16 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import date
+from Category_Manager.models import School
 
 # CharField는 임시적으로 모두 200글자 제한으로 둠
 
 class Study(models.Model):
 	name = models.CharField(max_length=200)
+	people_num =  models.IntegerField()
+	school = models.IntegerField()
 	category = models.IntegerField(null=True)
 	company = models.IntegerField(null=True)
-	# limit = models.IntegerField(null=True)
 	complete = models.BooleanField(default=False)
 	startTime = models.DateField(blank=True, null=True)
 	endTime = models.DateField(blank=True, null=True)
@@ -21,6 +23,7 @@ class Study(models.Model):
 		through='User_Study',
 		through_fields=('study', 'user'),
 	)
+	desc = models.TextField()
 
 	def save(self, *args, **kwargs):
 		super(Study, self).save(*args, **kwargs)
