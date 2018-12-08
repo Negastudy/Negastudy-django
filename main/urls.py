@@ -12,4 +12,5 @@ urlpatterns = [
     path('check_code', views.check_code, name='check_code'),
     url(r'^studyinfo/(?P<pk>\d+)/$', views.studyinfo, name='studyinfo'),
     path('create', views.create, name='createStudy'),
+    path('search', views.search, name='search'),
 ]

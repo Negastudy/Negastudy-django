@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import LoginForm, StudyForm
+from .forms import LoginForm, StudyForm, SearchForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.core.mail import send_mail
@@ -14,6 +14,8 @@ import json
 from django.contrib.auth.decorators import login_required
 from main.models import User_Study,User_Study_Assignment,Study,Assignment,Board,Attendance,Meeting
 from random import *
+from django.db.models import Q
+
 
 verifynum = 0
 
@@ -96,9 +98,6 @@ def Study_detail(request, pk):
 	EndTime = study_group.endTime
 	notice = getNotice(pk)
 	meeting_list = []
-	# Meeting.time.hour
-	# Meeting.time.minute
-	#Meeting.time.fold
 	try:
 		meeting_list = Meeting.objects.filter(study=pk).order_by('-date')
 		meeting_list = meeting_list[0:4]
@@ -209,5 +208,18 @@ def home(request):
 		url2 += "main_omr.jpg"
 
 
-
 	return render(request, 'main/home.html', locals())
+
+
+def search(request):
+	qs = Study.objects.all()
+	q = request.GET.get('q', '')
+	if q:
+		list = qs.filter(Q(name__contains=q) | Q(desc__contains=q))
+
+	return render(request, 'main/study_list.html', locals())
+
+
+
+
+
