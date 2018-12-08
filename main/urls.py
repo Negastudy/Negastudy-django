@@ -7,7 +7,7 @@ urlpatterns = [
     path('mypage', views.mypage, name='mypage'),
     path('sign_up', views.sign_up, name='sign_up'),
     path('send_email', views.send_email, name='send_email'),
-    path('study_group', views.Study_Group, name='study_group'),
+    url(r'^study_group/(?P<pk>\d+)/$', views.Study_detail, name='study_group'),
     path('check_code', views.check_code, name='check_code'),
     url(r'^studyinfo/(?P<pk>\d+)/$', views.studyinfo, name='studyinfo'),
 ]
