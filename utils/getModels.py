@@ -15,7 +15,7 @@ def getNotice(pk):
 	except Board.DoesNotExist:
 		title = None
 
-	return " "
+	return title
 
 
 def getPeoplenames(pk):
