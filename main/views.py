@@ -97,6 +97,7 @@ def Study_detail(request, pk):
 	except Meeting.DoesNotExist:
 		meeting_list = None
 	people = getPeoplenames(pk)
-
+	complete = study_group.complete
+	print(complete)
 
 	return render(request, 'main/Study_Group.html', locals())
