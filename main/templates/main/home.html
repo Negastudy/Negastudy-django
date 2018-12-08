@@ -44,15 +44,6 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <!--검색창 부분-->
-            <header>
-                <div id="search">
-                    <input type="text" name="search" class="search-box" placeholder="  스터디 검색">
-                    <button class="search-but">
-                        <img style="width:100%; height: inherit " src="../../static/images/main_search.png">
-                    </button>
-                </div>
-            </header>
 
             <section class="tiles">
                 {% for a in alarm %}
@@ -106,6 +97,12 @@
 
                 .
             </section>
+                    <button  class="create-study">
+                <a href="../Study_Create/Study_Create.html">
+                    <!--<img src="../images/main-plus.png"/>-->
+                    <p class="create-content">스터디 검색하기</p>
+                </a>
+            </button>
             <button  class="create-study">
                 <a href="../Study_Create/Study_Create.html">
                     <!--<img src="../images/main-plus.png"/>-->
