@@ -11,6 +11,7 @@ from Category_Manager.models import School
 class Study(models.Model):
 	name = models.CharField(max_length=200)
 	people_num =  models.IntegerField()
+	limit = models.IntegerField()
 	school = models.IntegerField()
 	category = models.IntegerField(null=True)
 	company = models.IntegerField(null=True)
