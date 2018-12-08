@@ -11,8 +11,8 @@ from Category_Manager.models import School
 class Study(models.Model):
 	name = models.CharField(max_length=200)
 	people_num =  models.IntegerField(default=0)
-	limit = models.IntegerField()
-	school = models.IntegerField()
+	limit = models.IntegerField(default=100)
+	school = models.IntegerField(default=10)
 	category = models.IntegerField(null=True)
 	company = models.IntegerField(null=True)
 	complete = models.BooleanField(default=False)
@@ -24,12 +24,23 @@ class Study(models.Model):
 		through='User_Study',
 		through_fields=('study', 'user'),
 	)
-	desc = models.TextField()
+	desc = models.TextField(default="No description")
 
 	def save(self, *args, **kwargs):
 		super(Study, self).save(*args, **kwargs)
 		if self.endTime < date.today():
 			self.complete = True
+
+		count = 0
+		try:
+			user_study = User_Study.objects.filter(study=self.id)
+			people = []
+			for element in user_study:
+				count +=1
+		except User_Study.DoesNotExist:
+			pass
+
+		self.people_num = count
 		super(Study, self).save()
 
 	'''def __str__(self):
