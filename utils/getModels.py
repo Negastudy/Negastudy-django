@@ -67,6 +67,7 @@ def getMeetings(pk):
 	study_names = []
 	meeting_date = []
 	meeting_contents = []
+	meeting_pk = []
 
 	try:
 		user = User.objects.get(id=pk)
@@ -79,8 +80,9 @@ def getMeetings(pk):
 			for m in meetings:
 				meeting_date.append(m.date)
 				meeting_contents.append(m.content)
+				meeting_pk.append(study.id)
 	except:
 		print("No attributes")
 
-	return study_names, meeting_date, meeting_contents
+	return study_names, meeting_date, meeting_contents, meeting_pk
 

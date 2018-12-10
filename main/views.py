@@ -168,18 +168,18 @@ def Study_detail(request, pk):
 def home(request):
 	global user_id
 	user = User.objects.get(id=user_id)
-	study_names, meeting_date, meeting_contents = getMeetings(user_id)
+	study_names, meeting_date, meeting_contents, meeting_pk = getMeetings(user_id)
 	alarm_num = len(study_names)
 	alarm = []
 	for i in range(alarm_num):
 		year, month, day = str(meeting_date[i]).split('-')
 		alarm.append("[{}] : {} ({}/{})".format(study_names[i], meeting_contents[i], month, day))
-
 	school_num = user.last_name
 	school = School.objects.get(_id = int(school_num))
 	school_name = school.name # 유저 학교 명
 	school_study_num = Study.objects.filter(school = school.id).count() # 학교 스터디 개수
 	school_studying_num = Study.objects.filter(school = school.id, complete=False).count() # 진행중인 학교 스터디 개수
+	mylist = zip(alarm, meeting_pk)
 
 	category_num1 = randint(1, 10)
 	category1 = Category.objects.get(_id = int(category_num1))

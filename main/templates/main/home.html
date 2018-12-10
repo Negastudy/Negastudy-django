@@ -54,12 +54,14 @@
 {#			</header>#}
 
             <section class="tiles">
-                {% for a in alarm %}
+                {% for a, p in mylist %}
                     <div class="home-myinfo">
                         <ul class="home-ul" style="margin-bottom : 0em">
                             <li>
                                 <img src="../../static/images/main-alarm.png" style="width:1.2em; height:1em; margin-bottom: -2px">
+                                <a href="{% url 'study_group'  pk=p %}">
                                 {{ a }}
+                                </a>
                             </li>
                         </ul>
                     </div>
