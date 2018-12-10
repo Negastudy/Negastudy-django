@@ -1,4 +1,19 @@
-#studylist-wrapper > * > .inner {
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+.formm {
+    padding: 15px 2px 2px 0px;
+    background: #eee;
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 21px;
+    text-align: left;
+    height: 510px;
+}
+
+h1{
+    font-family: 'Noto Sans KR', sans-serif;;
+    font-family: 'Jeju Gothic', sans-serif;
+}
+#create-wrapper > * > .inner {
     width: 100%;
     max-width: 68em;
     margin: 0 auto;
@@ -7,19 +22,18 @@
 
 @media screen and (max-width: 736px) {
 
-    #studylist-wrapper > * > .inner {
+    #create-wrapper > * > .inner {
         padding: 0 1.25em;
     }
 
 }
 
 /* Header */
-
-#studylist-header {
+#create-header {
     padding: 8em 0 0.1em 0 ;
 }
 
-#studylist-header .logo {
+#create-header .logo {
     display: block;
     border-bottom: 0;
     color: inherit;
@@ -32,23 +46,23 @@
     /*width : 100%; !*로고 너비 헤더의 100*!*/
 }
 
-#studylist-header .logo > * {
+#create-header .logo > * {
     display: inline-block;
     vertical-align: middle;
 }
 
-#studylist-header .logo .symbol {
+#create-header .logo .symbol {
     margin-right: 0.65em;
 }
 
-#studylist-header .logo .symbol img {
+#create-header .logo .symbol img {
     display: block;
     width: 3em;
     height: 3em;
     margin-right: -0.8em;
 }
 
-#studylist-header nav {
+#create-header nav {
     position: fixed;
     right: 2em;
     top: 2em;
@@ -56,7 +70,7 @@
     padding: 0em 0 0.1em 0 ;
 }
 
-#studylist-header nav ul {
+#create-header nav ul {
     display: -moz-flex;
     display: -webkit-flex;
     display: -ms-flex;
@@ -70,12 +84,12 @@
     padding: 0;
 }
 
-#studylist-header nav ul li {
+#create-header nav ul li {
     display: block;
     padding: 0;
 }
 
-#studylist-header nav ul li a {
+#create-header nav ul li a {
     display: block;
     position: relative;
     height: 3em;
@@ -95,7 +109,7 @@
 
 @media screen and (max-width: 736px) {
 
-    #studylist-header {
+    #create-header {
         position: fixed;
         width:100%;
         background-color: white;
@@ -103,12 +117,12 @@
         padding: 1em 0 0.1em 0 ;
     }
 
-    #studylist-header nav {
+    #create-header nav {
         right: 0.5em;
         top: 0.5em;
     }
 
-    #studylist-header nav ul li a[href="#menu"]:before, #studylist-header nav ul li a[href="#menu"]:after {
+    #create-header nav ul li a[href="#menu"]:before, #create-header nav ul li a[href="#menu"]:after {
         background-size: 1.5em 1.5em;
     }
 
@@ -116,7 +130,7 @@
 
 /* Menu */
 
-#studylist-wrapper {
+#create-wrapper {
     width:100%;
     -moz-transition: opacity 0.45s ease;
     -webkit-transition: opacity 0.45s ease;
@@ -275,7 +289,7 @@
 
 }
 
-body.is-menu-visible #studylist-wrapper {
+body.is-menu-visible #create-wrapper {
     pointer-events: none;
     cursor: default;
     opacity: 0.25;
@@ -300,13 +314,91 @@ body.is-menu-visible #menu .close {
     transform: scale(1.0) rotate(0deg);
     opacity: 1;
 }
-
-/*프로필 사진 선택 버튼*/
-.userphoto{
-    background-color: #fff;
+.btn1 {
+    margin-left: 100px;
+    margin-top: 25px;
+    -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+    box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+    /*background:-moz-linear-gradient( center top, #c5e37f 5%, #8cb82b 100% );*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c5e37f', endColorstr='#8cb82b');
+    background-color:#79bbff;
+    -webkit-border-top-left-radius:27px;
+    -moz-border-radius-topleft:27px;
+    border-top-left-radius:27px;
+    -webkit-border-top-right-radius:27px;
+    -moz-border-radius-topright:27px;
+    border-top-right-radius:27px;
+    -webkit-border-bottom-right-radius:27px;
+    -moz-border-radius-bottomright:27px;
+    border-bottom-right-radius:27px;
+    -webkit-border-bottom-left-radius:27px;
+    -moz-border-radius-bottomleft:27px;
+    border-bottom-left-radius:27px;
+    text-indent:1px;
+    border:1px solid #84bbf3;
+    display:inline-block;
+    color:#ffffff;
+    font-family:Trebuchet MS;
+    font-size:14px;
+    font-weight:bold;
+    font-style:normal;
+    height:35px;
+    line-height:35px;
+    width:67px;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0px #528ecc;
+}
+.btn1:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+    /*background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+    background-color:#378de5;
+}.btn1:active {
+     position:relative;
+     top:1px;
+ }
+.btn2 {
+    margin-left: 10px;
+    margin-top: 25px;
+    -moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+    box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+    /*background:-moz-linear-gradient( center top, #c5e37f 5%, #8cb82b 100% );*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c5e37f', endColorstr='#8cb82b');
+    background-color:#79bbff;
+    -webkit-border-top-left-radius:27px;
+    -moz-border-radius-topleft:27px;
+    border-top-left-radius:27px;
+    -webkit-border-top-right-radius:27px;
+    -moz-border-radius-topright:27px;
+    border-top-right-radius:27px;
+    -webkit-border-bottom-right-radius:27px;
+    -moz-border-radius-bottomright:27px;
+    border-bottom-right-radius:27px;
+    -webkit-border-bottom-left-radius:27px;
+    -moz-border-radius-bottomleft:27px;
+    border-bottom-left-radius:27px;
+    text-indent:1px;
+    border:1px solid #84bbf3;
+    display:inline-block;
+    color:#ffffff;
+    font-family:Trebuchet MS;
+    font-size:14px;
+    font-weight:bold;
+    font-style:normal;
+    height:35px;
+    line-height:35px;
+    width:67px;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0px #528ecc;
 }
 
-#studylist-header .mypage-icon {
+#create-header .mypage-icon {
     display: block;
     border-bottom: 0;
     color: inherit;
@@ -319,112 +411,21 @@ body.is-menu-visible #menu .close {
     /*width : 100%; !*로고 너비 헤더의 100*!*/
 }
 
-#studylist-header .mypage-icon > * {
+#create-header .mypage-icon > * {
     display: inline-block;
     vertical-align: middle;
 }
 
-#studylist-header .mypage-icon .mypage-icon-but {
+#create-header .mypage-icon .mypage-icon-but {
     /*margin-right: 0.65em;*/
     margin-left: 5em;
 }
 
-#studylist-header .mypage-icon .mypage-icon-but img {
+#create-header .mypage-icon .mypage-icon-but img {
     display: block;
     width: 100%;
     height: 100%;
     margin-right: -0.8em;
     /*margin-bottom: -4em;*/
-}
-#studylist-main {
-}
-#studylist-main .mypage-profile{
-    width: 100%;
-    height : 10em;
-    margin-top: 2em;
-    border: 1px solid #9DD044;
-    border-radius : 5px;
-}
-#studylist-main .mypage-profile-img{
-    width : 30%;
-    height : inherit;
-    float:left;
-    margin : 0;
-    padding : 1.5em 0.3em;
-    border-right : 1px solid #9dd044;
-    background-color: #9dd044;
-}
-#studylist-main .mypage-profile-img img{
-    width :6.5em;
-    height :6.5em;
-    margin:0;
-}
-
-.list-background{
-    width:100%;
-    height:100%;
-    /*padding-top:10px;*/
-    /*background-color: #ededed;*/
-}
-
-.list-box{
-    background-color: #ffff;
-    width:100%;
-    height: 5em;
-    margin:1em 0;
-    padding : 1em 0 1em 1em;
-}
-
-.list-box-content{
-
-    /* height: inherit; */
-    float: left;
-    color: black;
-    font-size: 15px;
-     margin-top: 7px;
-    width: 90%;
-    margin-right: 10px;
-    display: inline-block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    text-align: left;
-    overflow: hidden;
-}
-
-.list-box-click img{
-       width: 10%;
-    height: 100%;
-    float: right;
-    padding-top: 0.5em;
-    margin-top: -2em;
-}
-
-#studylist-search{
-     margin-top: -4.5em;
-    width: 100%;
-    height: 4.3em;
-    background-color: white;
-}
-
-#studylist-search .search-box{
-    width:85%;
-    height:3em;
-    float:left;
-    border:1px solid lightgray;
-    margin: 0.5em 0em 0 0em;
-    padding-left: 0.5em;
-}
-
-#studylist-search .search-but{
-    width : 15%;
-    height : 3em;
-    float : right;
-    border:1px solid lightgray;
-    box-shadow: none;
-    margin: 0.5em 0em 0 0em;
-    padding : 0;
-    border-radius: 4px  ;
-
 }
 

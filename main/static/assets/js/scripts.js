@@ -5,12 +5,14 @@ jQuery(document).ready(function() {
         Fullscreen background
     */
     $.backstretch([
-        "../static/assets/img/backgrounds/2.jpg"
-        , "../static/assets/img/backgrounds/3.jpg"
-        , "../static/assets/img/backgrounds/1.jpg"
-        , "../static/assets/img/backgrounds/4.jpg"
-        , "../static/assets/img/backgrounds/5.jpg"
-        , "../static/assets/img/backgrounds/6.jpg"
+        "2.jpg",
+        "../../static/assert/img/backgrounds/2.jpg",
+        // ,"../static/assets/img/backgrounds/2.jpg"
+        // , "../static/assets/img/backgrounds/3.jpg"
+        // , "../static/assets/img/backgrounds/1.jpg"
+        // , "../static/assets/img/backgrounds/4.jpg"
+        // , "../static/assets/img/backgrounds/5.jpg"
+        // , "../static/assets/img/backgrounds/6.jpg"
     ], {duration: 6000, fade: 550});
 
     /*

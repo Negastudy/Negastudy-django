@@ -15,9 +15,11 @@ from django.contrib.auth.decorators import login_required
 from main.models import User_Study,User_Study_Assignment,Study,Assignment,Board,Attendance,Meeting
 from random import *
 from django.db.models import Q
+from django.http import HttpResponse, JsonResponse
 
 
 verifynum = 0
+user_id = 6
 
 def sign_in(request):
 	if request.method == "POST":
@@ -35,8 +37,28 @@ def sign_in(request):
 
 
 def mypage(request):
-	data = {'username': request.user, 'email': request.user.email}
-	return render(request, 'main/mypage.html', {'data': data})
+	global user_id
+	user_pk = User.objects.get(id=user_id)
+	study = User_Study.objects.filter(user=user_pk)
+	latest_list = []
+	pk_list = []
+	school_name = School.objects.get(_id=user_pk.last_name).name
+	if (user_pk.last_name == '10'):
+		school_name = ""
+	data = {'username': user_pk, 'email': user_pk.email, 'first_name': user_pk.first_name,
+	        'last_name': school_name}
+
+	print(study)
+	for st in study:
+		tmp = Meeting.objects.filter(study=st.study)
+		latest = tmp.latest('date').content
+		latest_list.append(latest)
+		pk_list.append(st.study.pk)
+
+	mylist = zip(study, latest_list, pk_list)
+	mylist2 = zip(study, latest_list, pk_list)
+
+	return render(request, 'main/mypage.html', {'data': data, 'mylist': mylist, 'mylist2': mylist2})
 
 
 def studyinfo(request, pk):
@@ -48,45 +70,74 @@ def studyinfo(request, pk):
 
 def sign_up(request): # 미완성
 	if request.method == "POST":
-		emailcheck = request.POST.get('code', '')
+		name = request.POST['signup_name']
+		school = request.POST['school']
+		iden = request.POST['signup_id']
+		pwd = request.POST['signup_pwd']
+		pwd2 = request.POST['signup_pwd_check']
+		flag = request.session.get('flag')
+		email = request.session.get('email')
 
-	#if pwd != pwd2:
-	#    messages.error(request, '비밀번호와 비밀번호 확인이 일치하지 않습니다.')
-	#    return redirect('sign_up')
+		print(flag)
 
-	# if emailcheck != '':
-	#    if int(emailcheck) != verifynum:
-	#      print(int(emailcheck), verifynum, "NOTVALID")
-	#      messages.error(request, '이메일 인증 코드가 유효하지 않습니다.')
+		if pwd != pwd2:
+			print('비밀번호와 비밀번호 확인이 일치하지 않습니다.')
+			return HttpResponse('Error PWD NOT CORRECT')
 
-	#else:
-	#id = request.POST['signup-id']
-	#pwd = request.POST['signup-pwd']
-	#pwd2 = request.POST['signup-pwd-check']
-	#User.objects.create_user(username=id, email=email, password=pwd2)
-	#  User.objects.create_user(username=id, email=email, password=pwd2)
+		elif flag == 1:
+			User.objects.create_user(username=iden, email=email, password=pwd2, first_name=name, last_name=school)
 	return render(request, 'main/Sign_Up.html')
 
 
 def send_email(request):
 	if request.method == "POST":
 		email = request.POST.get('email', '')
-
-		global verifynum
 		verifynum = random.randint(1, 10000) + 10000
-		request.session
-		send_mail('Negastudy Email Verification Code', 'The verification code is '+str(verifynum), 'negastudyverify@gmail.com', [email], fail_silently=False)
+		request.session['num'] = verifynum
+		request.session['email'] = email
+		send_mail('Negastudy Email Verification Code', 'The verification code is ' + str(verifynum),
+		          'negastudyverify@gmail.com', [email], fail_silently=False)
+
 	return HttpResponse('success')
 
 
 def check_code(request):
 	if request.method == "POST":
-		code = request.POST.get('code','')
-		global verifynum
+		code = request.POST.get('code', '')
+		verifynum = request.session.get('num')
 
 		if int(code) != verifynum:
+			request.session['flag'] = 0
 			print(int(code), verifynum, "NOTVALID")
-			messages.error(request, '이메일 인증 코드가 유효하지 않습니다.')
+			return JsonResponse({'flag': 0})
+
+		else:
+			request.session['flag'] = 1
+			return JsonResponse({'flag': 1})
+
+	return HttpResponse('')
+
+
+def apply(request, pk):
+    study = Study.objects.get(pk=pk)
+    current_usr = User_Study.objects.filter(study=study).count()
+    category_name = Category.objects.get(_id=study.category).name
+    company_name = Company.objects.get(_id=study.company).name
+    school_name = School.objects.get(_id=study.school).name
+    # 유저 pk 넘겨주기
+
+    return render(request, 'main/Study_Apply.html', {'study': study, 'current_usr': current_usr, 'category_name': category_name, 'company_name': company_name, 'school_name': school_name})
+
+
+def create(request):
+    if request.method == "POST":
+        name = request.POST['subject']
+        people = request.POST['chkbox']
+        category = request.POST['category']
+        company = request.POST['company']
+        school = request.POST['school']
+
+    return render(request, 'main/Study_Create.html')
 
 
 def Study_detail(request, pk):
@@ -113,28 +164,9 @@ def Study_detail(request, pk):
 	return render(request, 'main/Study_Group.html', locals())
 
 
-def create(request):
-	form = StudyForm(request.POST)
-	if request.method =='POST':
-		try:
-			category_namelist, category_numlist = getCategoryNames()
-			school_namelist, school_numlist = getSchoolNames()
-			Company_namelist, Company_numlist = getCompanyNames()
-			return HttpResponse(json.dumps({'category_namelist': category_namelist,
-			                                'category_numlist': category_numlist,
-			                                'school_namelist': school_namelist,
-			                                'school_numlist': school_numlist,
-			                                'Company_namelist': Company_namelist,
-			                                'Company_numlist': Company_numlist,}), 'application/json')
-		except:
-			if form.is_valid():
-				pass
-	return render(request, 'main/Study_Create.html', locals())
-
-
 # @login_required (login_url = '/sign_in/')
 def home(request):
-	user_id=5
+	global user_id
 	user = User.objects.get(id=user_id)
 	study_names, meeting_date, meeting_contents = getMeetings(user_id)
 	alarm_num = len(study_names)
@@ -152,16 +184,16 @@ def home(request):
 	category_num1 = randint(1, 10)
 	category1 = Category.objects.get(_id = int(category_num1))
 	category_name1 = category1.name #랜덤 카테고리 명
-	category_study_num1 = Study.objects.filter(category=category1.id).count()
-	category_studying_num1 = Study.objects.filter(category=category1.id, complete=False).count()
+	category_study_num1 = Study.objects.filter(category=category1._id).count()
+	category_studying_num1 = Study.objects.filter(category=category1._id, complete=False).count()
 
 	category_num2 = 10
 	while category_num2 == category_num1:
 		category_num2 = randint(1, 10)
 	category2 = Category.objects.get(_id=int(category_num2))
 	category_name2 = category2.name  # 랜덤 카테고리 명
-	category_study_num2 = Study.objects.filter(category=category2.id).count()
-	category_studying_num2 = Study.objects.filter(category=category2.id, complete=False).count()
+	category_study_num2 = Study.objects.filter(category=category2._id).count()
+	category_studying_num2 = Study.objects.filter(Q(category=category2._id) & Q(complete=False)).count()
 
 	url1 = "../../static/images/"
 	if category_num1 == 1:
@@ -220,6 +252,20 @@ def search(request):
 	return render(request, 'main/study_list.html', locals())
 
 
+def categoty_school(request, pk):
+	qs = Study.objects.all()
+	category = School.objects.get(id=pk)._id
+	list = qs.filter(school=category)
+
+	return render(request, 'main/study_list.html', locals())
+
+
+def categoty(request, pk):
+	qs = Study.objects.all()
+	category = Category.objects.get(id=pk)._id
+	list = qs.filter(category=category)
+
+	return render(request, 'main/study_list.html', locals())
 
 
 

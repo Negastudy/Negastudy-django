@@ -22,7 +22,7 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="home.html" class="logo">
+            <a href='{% url 'home' %}' class="logo">
 				<span class="symbol" >
 					<img src="../../static/images/로고_전구.png" alt="" />
 				</span>
@@ -30,7 +30,7 @@
             </a>
 
             <!--my page-->
-            <a href="../My_Page/mypage.html" class="mypage-icon">
+            <a href='{% url 'mypage' %}' class="mypage-icon">
 				<span class="mypage-icon-but">
 					<img src="../../static/images/mypage_icon.png" style="width:2.5em; height:2em"/>
 
@@ -44,6 +44,14 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
+{#            <header>#}
+{#				<div id="search"></div>#}
+{#					<input type="text" name="search" class="search-box" placeholder="  스터디 검색">#}
+{#					<button class="search-but">#}
+{#						<img style="width:100%; height: inherit " src="../../static/images/main_search.png">#}
+{#					</button>#}
+{#			</div>#}
+{#			</header>#}
 
             <section class="tiles">
                 {% for a in alarm %}
@@ -62,7 +70,7 @@
 					<span class="image tile_img">
 						<img src="../../static/images/main_study.jpg"  alt="" />
 					</span>
-                        <a href="">
+                        <a href='{% url 'cate' pk=school.pk%}'>
                             <h2>#{{ school_name }}</h2>
                             <h3>현재 모집 중 스터디 :
                                 <span style="font-size:30px;color:yellow">{{ school_studying_num }} </span>개</h3>
@@ -73,11 +81,12 @@
                         </a>
                     </article>
                 {% endif %}
+
                 <article class="style1" style="width:100%">
 					<span class="image tile_img">
 						<img src={{ url1 }}  alt="" />
 					</span>
-                    <a href="">
+                    <a href='{% url 'cate2' pk=category1.pk%}'>
                         <h2>#{{ category_name1 }}</h2>
                         <h3>현재 모집 중 스터디 :
                             <span style="font-size:30px;color:yellow">{{ category_studying_num1 }} </span>개</h3>
@@ -87,7 +96,7 @@
 					<span class="image tile_img">
 						<img src={{ url2 }}  alt="" />
 					</span>
-                    <a href="">
+                    <a href='{% url 'cate2' pk=category2.pk%}'>
                         <h2>#{{ category_name2 }}</h2>
                         <h3>현재 모집 중 스터디 :
                             <span style="font-size:30px;color:yellow">{{ category_studying_num2 }} </span>개</h3>
@@ -95,20 +104,19 @@
                 </article>
 
 
-                .
-            </section>
-                    <button  class="create-study">
-                <a href="../Study_Create/Study_Create.html">
-                    <!--<img src="../images/main-plus.png"/>-->
-                    <p class="create-content">스터디 검색하기</p>
-                </a>
-            </button>
-            <button  class="create-study">
-                <a href="../Study_Create/Study_Create.html">
-                    <!--<img src="../images/main-plus.png"/>-->
-                    <p class="create-content">스터디 생성하기</p>
-                </a>
-            </button>
+
+			<button  class="create-study" style="margin-top:1em">
+				<a href='{% url 'search' %}'>
+				<!--<img src="../images/main-plus.png"/>-->
+				<p class="create-content">스터디 검색하기</p>
+				</a>
+			</button>
+			<button  class="create-study">
+				<a href='{% url 'createStudy' %}'>
+					<!--<img src="../images/main-plus.png"/>-->
+					<p class="create-content">스터디 생성하기</p>
+				</a>
+			</button>
 
         </div>
     </div>

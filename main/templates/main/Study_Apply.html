@@ -1,0 +1,118 @@
+
+<!--<%@ page language="java" contentType="text/html; charset=UTF-8"-->
+<!--pageEncoding="UTF-8"%>-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>NegaStudy</title>
+    <!--  CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/Study_Apply/Study_Apply.css">
+</head>
+
+<body>
+<div id="create-wrapper">
+    <header id="create-header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <a href='{% url 'home' %}' class="logo">
+				<span class="symbol" >
+					<img src="../../static/images/로고_전구.png" alt="" />
+				</span>
+                <span class="title" style="font-size: 1.3em; color: #585858;">NEGASTUDY</span>
+            </a>
+
+            <!-- Nav -->
+            <a href='{% url 'mypage' %}' class="mypage-icon">
+				<span class="mypage-icon-but">
+					<img src="../../static/images/mypage_icon.png" style="width:2.5em; height:2em"/>
+
+				</span>
+            </a>
+
+        </div>
+    </header>
+
+</div>
+    <br><br><br><br><br>
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc; border-radius:6px;}
+    .tg td{font-family:'Roboto', sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
+    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:lighter;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+    .tg .tg-95hz{background-color:#f9f9f9;font-family:Verdana, Geneva, sans-serif !important;;text-align:left}
+    .tg .tg-y1ay{font-weight:normal;font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;background-color:#A8C8F9;color:#000000;border-color:#ccc;text-align:center}
+    .tg .tg-hr1k{font-family:Verdana, Geneva, sans-serif !important;;text-align:left}
+    .tg .tg-l2v1{background-color:#A8C8F9;font-weight:normal;font-size:12px;font-family:Verdana, Geneva, sans-serif !important;;color:#000000;border-color:#ccc;text-align:center}
+    .tg .tg-gqep{font-family:Verdana, Geneva, sans-serif !important;;text-align:left;vertical-align:top}
+    .tg .tg-ys40{background-color:#f9f9f9;font-family:Verdana, Geneva, sans-serif !important;;text-align:left;vertical-align:top}
+</style>
+
+<!--스터디 신청 헤드라인-->
+<div style="margin-left:15px;margin-bottom:-10px;color: grey;font-weight: lighter;font-family: 'Jeju Gothic' " >* 참여하고자 하는 스터디의 내용을 확인하세요.</div><br>
+
+<!--스터디 정보 나타내는 테이블-->
+<table class="tg" style="table-layout: fixed; width: 95%; margin-left:auto;margin-right:auto;border: 2px solid #A8C8F9;">
+    <colgroup>
+        <col style="width: 30%">
+        <col style="width: 70%">
+    </colgroup>
+    <tr>
+        <td class="tg-y1ay"><strong>스터디 이름</strong></td>
+        <td class="tg-hr1k">
+            <div class="form-control">{{ study.name }}</div>
+        </td>
+    </tr>
+    <tr>
+        <td class="tg-l2v1"><strong>현재인원</strong></td>
+        <td class="tg-95hz">
+            <div class="form-control" style="width:15% ; display: inline-block;">{{ current_usr }}</div>
+            &nbsp/&nbsp
+            <div class="form-control" style="width:15% ; display: inline-block;">{{ study.limit }}</div>
+        </td>
+    </tr>
+    <tr>
+        <td class="tg-y1ay"><strong>카테고리</strong></td>
+        <td>
+            <div class="form-control" style="width:auto">{{ category_name }}</div>
+        </td>
+    </tr>
+    <tr>
+        <td class="tg-y1ay"><strong>목표기업</strong></td>
+        <td>
+            <div class="form-control" style="width:auto">{{ company_name }}</div>
+        </td>
+    </tr>
+    <tr>
+        <td class="tg-l2v1"><strong>모집 학교</strong></td>
+        <td class="tg-ys40">
+            <div class="form-control">{{ school_name }}</div>
+        </td>
+    </tr>
+    <tr>
+        <td class="tg-l2v1"><strong>스터디기간</strong></td>
+        <td class="tg-95hz">
+            <div class="form-control" style="width:42% ; display: inline-block;">{{ study.startTime }}</div>
+            &nbsp~&nbsp
+            <div class="form-control" style="width:42% ; display: inline-block;">{{ study.endTime }}</div>
+        </td>
+    </tr>
+    <tr>
+        <td class="tg-y1ay"><strong>스터디 설명</strong></td>
+        <td class="tg-gqep" >
+            <div class="form-control" style="height: 80px;">{{ study.desc }}</div>
+        </td>
+    </tr>
+</table>
+
+<input type="submit" value="신청" onclick="location.href='../study_list/study_list.html'" class=" btn1"/>
+<input type="button" value="이전" class=" btn2" onclick="location.href='../study_list/study_list.html'"/>
+
+</body>
+</html>
+
+
+

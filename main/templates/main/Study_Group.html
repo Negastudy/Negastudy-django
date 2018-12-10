@@ -29,7 +29,7 @@
         <div class="inner">
 
             <!-- Logo -->
-            <a href="../home/home.html" class="logo">
+            <a href='{% url 'home' %}' class="logo">
                     <span class="symbol" >
                         <img src="../../static/images/로고_전구.png" alt="" />
                     </span>
@@ -38,7 +38,7 @@
 
 
             <!-- Nav -->
-            <a href="Edit_Study_Group.html" class="mypage-icon">
+            <a href='{% url 'mypage' %}' class="mypage-icon">
                 <!--세팅버튼-->
                 <span class="mypage-icon-but2">
                         <img src="../../static/images/group-setting.png" style="width:2.5em; height:2em"/>
@@ -125,19 +125,52 @@
             <!--멤버 관리-->
             <div class="study-mem">
                 <legend> 회원 관리 </legend>
+                <div class = "temp">
                 {% for p in people %}
+                    {#                    <script>#}
+                    {#                        var ran= function(min,max){#}
+                    {#                            var rannum = Math.floor(Math.random()*(max-min+1))+min;#}
+                    {#                            return rannum;#}
+                    {#                        }#}
+                    {#                        var num = ran(0,100);#}
+                    {#                        console.log(num);#}
+                    {#                        $('.progress-bar-small ').removeAttr("width");#}
+                    {#                        $('.progress-bar-small ').attr("style", "WIDTH:"+num+"%");#}
+                    {#                    </script>#}
                     <div class="mem">
                         <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="mem-img"/>
-                        <div class="mem-content"> <strong> {{p.username}}</strong> 참여도
+                        <div class="mem-content"> <strong> {{p.first_name}}</strong> 참여도
                             <!--<p> 스터디 참여도</p>-->
+
+                            <script>
+                                    var ran= function(min,max){
+                                        var rannum = Math.floor(Math.random()*(max-min+1))+min;
+                                        return rannum;
+                                    }
+                                    $('.temp div div div div').each(function (index,element){
+                                        var num = ran(0,100);
+                                        $(element).attr("style", "WIDTH:"+num+"%");
+                                    });
+                                </script>
                             <DIV class=progress-small>
-                                <DIV role=progressbar aria-valuenow=10 aria-valuemin=0 class="progress-bar-small progress-bar-s-success" style="WIDTH: 80%" aria-valuemax=100>
+                                <DIV role=progressbar aria-valuenow=10 aria-valuemin=0 class="progress-bar-small progress-bar-s-success" aria-valuemax=100 >
                                     <SPAN class=sr-only>60% Complete</SPAN>
                                 </DIV><!-- Complete -->
+                                <script>
+                                    var ran= function(min,max){
+                                        var rannum = Math.floor(Math.random()*(max-min+1))+min;
+                                        return rannum;
+                                    }
+                                    $('.temp div div div div').each(function (index,element){
+                                        var num = ran(0,100);
+                                        $(element).attr("style", "WIDTH:"+num+"%");
+                                    });
+                                </script>
                             </DIV>
                         </div>
                     </div>
                 {% endfor %}
+                </div>
             </div>
         </div><!--/col-9-->
     </div><!--/row-->

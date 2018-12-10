@@ -6,32 +6,29 @@
 -->
 
 <!--css-->
-<link rel="stylesheet" href="../assets/css/main.css" />
-<link rel="stylesheet" href="mypage.css">
+<link rel="stylesheet" href="../../static/assets/css/main.css" />
+<link rel="stylesheet" href="../../static/My_Page/mypage.css">
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css-411">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css-411">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!------ Include the above in your HEAD tag ---------->
-
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css-400">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css-400">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!------ Include the above in your HEAD tag ---------->
 <html>
 
 <head>
-	<title>Bootstrap Example</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NEGASTUDY</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 
 <body>
@@ -40,7 +37,7 @@
 		<div class="inner">
 
 			<!-- Logo -->
-			<a href="../../static/home/home.html" class="logo">
+			<a href='{% url 'home' %}' class="logo">
 				<span class="symbol" >
 					<img src="../../static/images/로고_전구.png" alt="" />
 				</span>
@@ -48,61 +45,94 @@
 			</a>
 
 			<!-- Nav -->
-			<nav>
-				<ul>
-					<li><a href="#menu">Menu</a></li>
-				</ul>
-			</nav>
+            <a href='{% url 'mypage' %}' class="mypage-icon">
+				<span class="mypage-icon-but">
+					<img src="../../static/images/mypage_icon.png" style="width:2.5em; height:2em"/>
+
+				</span>
+            </a>
 
 		</div>
 	</header>
 
-	<!-- Menu -->
-	<nav id="menu">
-		<h2>Menu</h2>
-		<ul>
-			<li><a href="home.html">홈 화면</a></li>
-			<!--<li><a href="../generic.html">즐겨찾기</a></li>-->
-			<!--<li><a href="../generic.html">나의 일정관리</a></li>-->
-			<li><a href="generic.html">스터디 카페</a></li>
-			<li><a href="mypage.html">마이 페이지</a></li>
-		</ul>
-	</nav>
 </div>
 
 
 <!--main-->
-<div class="container bootstrap snippet">
+<div id="mypage-main"class="container bootstrap snippet">
 	<!--<div class="row">-->
 		<!--<div class="col-sm-10"><h1>My Page</h1></div>-->
 	<!--</div>-->
 	<div class="row">
 		<div class="col-sm-3" style="margin-top:4em"><!--left col-->
-			<div class="text-center">
-				<br><br>
-				<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" width="150px" height="150px" alt="avatar">
-				<input type="file" name="userphoto" id="userphoto" class="userphoto text-center center-block file-upload">
+			<!--개인정보-->
+            <div class="mypage-profile">
+                <div class="mypage-profile-img">
+                    <img src="../../static/images/mypage-user.png">
+                </div>
+                <div class="mypage-profile-content">
+                    <ul style="list-style-type: none">
+                        <!--개인정보 변경시에 input tag-->
+                        <li>{{ data.username }}</li>
+                        <li>{{ data.first_name }}</li>
+                        <!--비밀번호는 별처리해서 그냥 텍스트로-->
+                        <li>{{ data.last_name }}</li>
+                        <li>{{ data.useremail }}</li>
+                    </ul>
+                </div>
+                <!--개인 정보 변경 버튼-->
+                <button class="mypage-profile-edit">
+                    <span style="color:white">변경</span></button>
+                <button onclick="location.href='{% url 'logout' %}'" class="mypage-profile-logout">
+                    <span style="color:white">로그아웃</span></button>
 			</div>
 
-			<br><br>
-
+            <br>
 			<!--사용자 프로필-->
-			<div class="panel panel-default">
-				<div class="panel-heading" style="background-color : #9DD044">개인정보<i class="fa fa-link fa-1x"></i></div>
-				<div class="panel-body"><a > {{ username }} </a></div>
-				<div class="panel-body"><a > {% userschool %} </a></div>
-				<div class="panel-body"><a > {%useremail%} </a></div>
-			</div>
+			<!--<div class="panel panel-default">-->
+				<!--<div class="panel-heading" style="background-color : #9DD044">진행 중 스터디</div>-->
+				<!--<div class="panel-body"><a ></a></div>-->
+				<!--<div class="panel-body"><a ></a></div>-->
+				<!--<div class="panel-body"><a ></a></div>-->
+			<!--</div>-->
 
-			<!--사용자 스터디 목록 - 반복으로 출력 -->
+			<!--진행 중인 스터디-->
+            <!--li 클릭하면 스터디 상세 화면으로 이동 ** 데이터 가져가야함 -->
+            <!--이중 포문 필요할 듯-->
 			<ul class="list-group">
-				<li class="list-group-item text-muted"> 스터디 목록 <i class="fa fa-dashboard fa-1x"></i></li>
-				<li class="list-group-item text-right"><span class="pull-left"><strong>1</strong></span> 스터디 이름</li>
-				<li class="list-group-item text-right"><span class="pull-left"><strong>2</strong></span>스터디 이름</li>
-				<li class="list-group-item text-right"><span class="pull-left"><strong>3</strong></span>스터디 이름</li>
-				<li class="list-group-item text-right"><span class="pull-left"><strong>4</strong></span>스터디 이름</li>
+				<li onclick="" class="list-group-item text-muted" style="background-color: #9dd044; border:none">
+                    <strong>진행 중 스터디</strong></li>
+                {% for study,latest,pk in mylist %}
+                    {% if study.study.complete == False %}
+				<li class="list-group-item text-right "><span >
+                    <strong style="width:93%; margin-right:15px;display:inline-block; text-overflow:ellipsis; white-space:nowrap; word-wrap:normal; overflow:hidden;">{{ study.study.name }}</strong>
+                    <br><span class="mypage-list-detail">{{ latest }}</span></span>
+                    <a href='{% url 'study_group' pk=pk %}' class="next_">
+                    <img src="../../static/images/studylist-next.png" class="mypage-next"/>
+                    </a>
+                </li>
+                    {% endif %}
+                {% endfor %}
 			</ul>
 
+            <!--완료된 스터디-->
+            <ul class="list-group">
+                <!--<%for study  in study   %>-->
+                <!--if 완료-->
+                <li class="list-group-item text-muted" style="background-color: lightgray">
+                    <strong>완료 된 스터디</strong></li>
+                 {% for study,latest,pk in mylist2 %}
+                    {% if study.study.complete == True %}
+				<li class="list-group-item text-right"><span class="pull-left">
+                    <strong>{{ study.study.name }}</strong></span>
+                    <a href='{% url 'study_group' pk=pk %}' class="next_">
+                    <img src="../../static/images/studylist-next.png" class="mypage-next"/>
+                    </a>
+                </li>
+                    {% endif %}
+                {% endfor %}
+
+            </ul>
 		</div><!--/col-9-->
 	</div><!--/row-->
 </div>
